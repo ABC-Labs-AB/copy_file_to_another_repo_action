@@ -51,7 +51,7 @@ then
   OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE"
 fi
 
-cd ".."
+cd "-"
 
 echo "Copying contents to git repo"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
