@@ -51,14 +51,15 @@ if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]
 then
 
   if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE_ORIGIN" ]
+  ORIGIN_BRANCH="main"
   then
     git fetch
     echo "Choosing ${INPUT_DESTINATION_BRANCH_CREATE_ORIGIN} as origin for new branch to create"
-    git checkout "$INPUT_DESTINATION_BRANCH_CREATE_ORIGIN"
-    git pull
+    ORIGIN_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE_ORIGIN"
+  else
   fi
   echo "Creating new branch: ${INPUT_DESTINATION_BRANCH_CREATE}"
-  git checkout -b "$INPUT_DESTINATION_BRANCH_CREATE"
+  git checkout -b "$INPUT_DESTINATION_BRANCH_CREATE" "$ORIGIN_BRANCH"
   OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE"
 fi
 
