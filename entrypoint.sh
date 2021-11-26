@@ -35,16 +35,6 @@ else
   DEST_COPY="$CLONE_DIR/$INPUT_DESTINATION_FOLDER"
 fi
 
-echo "Copying contents to git repo"
-mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
-if [ -z "$INPUT_USE_RSYNC" ]
-then
-  cp -R "$INPUT_SOURCE_FILE" "$DEST_COPY"
-else
-  echo "rsync mode detected"
-  rsync -avrh "$INPUT_SOURCE_FILE" "$DEST_COPY"
-fi
-
 cd "$CLONE_DIR"
 
 if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]
@@ -60,6 +50,21 @@ then
   git checkout -b "$INPUT_DESTINATION_BRANCH_CREATE" "$ORIGIN_BRANCH"
   OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE"
 fi
+
+cd ".."
+
+echo "Copying contents to git repo"
+mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
+if [ -z "$INPUT_USE_RSYNC" ]
+then
+  cp -R "$INPUT_SOURCE_FILE" "$DEST_COPY"
+else
+  echo "rsync mode detected"
+  rsync -avrh "$INPUT_SOURCE_FILE" "$DEST_COPY"
+fi
+
+cd "$CLONE_DIR"
+
 
 if [ -z "$INPUT_COMMIT_MESSAGE" ]
 then
