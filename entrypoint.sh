@@ -50,9 +50,9 @@ cd "$CLONE_DIR"
 if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE" ]
 then
   ORIGIN_BRANCH="main"
+  git fetch --all
   if [ ! -z "$INPUT_DESTINATION_BRANCH_CREATE_ORIGIN" ]
   then
-    git fetch
     echo "Choosing ${INPUT_DESTINATION_BRANCH_CREATE_ORIGIN} as origin for new branch to create"
     ORIGIN_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE_ORIGIN"
   fi
